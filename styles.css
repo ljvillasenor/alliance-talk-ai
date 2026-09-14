@@ -254,6 +254,17 @@ p.lede {
   font-style: italic;
 }
 
+.callout.hinge {
+  border-left-width: 5px;
+  border-left-color: var(--accent);
+  background: linear-gradient(90deg, rgba(196, 165, 116, 0.14), var(--bg-card) 45%);
+  padding: 1.35rem 1.5rem;
+  margin: 2rem 0 1.5rem;
+  font-size: 1.2em;
+  line-height: 1.45;
+  box-shadow: 0 0 0 1px rgba(196, 165, 116, 0.35);
+}
+
 .callout strong { color: var(--accent); }
 
 .takeaways {
