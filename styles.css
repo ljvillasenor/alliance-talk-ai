@@ -287,10 +287,6 @@ p.lede {
   justify-content: center;
 }
 
-.film-block {
-  margin: 1.5rem 0 2rem;
-}
-
 .film-placeholder {
   aspect-ratio: 16 / 9;
   background: #0d0f14;
@@ -298,6 +294,7 @@ p.lede {
   border-radius: 10px;
   overflow: hidden;
   position: relative;
+  margin: 1.5rem 0 2rem;
 }
 
 .film-placeholder video {
@@ -306,52 +303,6 @@ p.lede {
   display: block;
   object-fit: contain;
   background: #000;
-}
-
-.film-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.4rem;
-  margin-top: 0.65rem;
-}
-
-.film-btn {
-  font-family: var(--sans);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  line-height: 1.2;
-  color: var(--text);
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 0.4rem 0.7rem;
-  cursor: pointer;
-  transition: color 0.15s, background 0.15s, border-color 0.15s;
-}
-
-.film-btn:hover {
-  color: var(--text);
-  background: var(--accent-soft);
-  border-color: var(--accent-line);
-}
-
-.film-btn:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.film-btn-primary {
-  color: #12151a;
-  background: var(--accent);
-  border-color: var(--accent);
-}
-
-.film-btn-primary:hover {
-  color: #12151a;
-  background: #d4b88a;
-  border-color: #d4b88a;
 }
 
 .two-col {
