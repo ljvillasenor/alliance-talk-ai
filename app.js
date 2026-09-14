@@ -78,6 +78,12 @@
     );
   }
 
+  function isFilmTarget(el) {
+    if (!el) return false;
+    if (el.tagName === "VIDEO") return true;
+    return !!(el.closest && el.closest(".film-block"));
+  }
+
   function openHelp() {
     if (!helpOverlay) return;
     helpOverlay.hidden = false;
@@ -117,6 +123,7 @@
     }
 
     if (helpOverlay && helpOverlay.classList.contains("open")) return;
+    if (isFilmTarget(e.target)) return;
 
     var idx = currentIndex();
 
@@ -146,4 +153,51 @@
       if (e.target === helpOverlay) closeHelp();
     });
   }
+
+  /* Opening film review controls */
+  (function initOpeningFilm() {
+    var video = document.getElementById("openingFilm");
+    if (!video) return;
+    var block = video.closest ? video.closest(".film-block") : null;
+    if (!block) return;
+    var toggleBtn = block.querySelector('[data-film="toggle"]');
+
+    function clampTime(t) {
+      var d = video.duration;
+      if (!isFinite(d) || d <= 0) return Math.max(0, t);
+      return Math.max(0, Math.min(t, d));
+    }
+
+    function updateToggleLabel() {
+      if (!toggleBtn) return;
+      if (video.paused) {
+        toggleBtn.textContent = "▶ Play";
+        toggleBtn.title = "Play";
+      } else {
+        toggleBtn.textContent = "⏸ Pause";
+        toggleBtn.title = "Pause";
+      }
+    }
+
+    block.addEventListener("click", function (e) {
+      var btn = e.target.closest ? e.target.closest("[data-film]") : null;
+      if (!btn || !block.contains(btn)) return;
+      var action = btn.getAttribute("data-film");
+      if (action === "restart") {
+        video.currentTime = 0;
+        video.play();
+      } else if (action === "back") {
+        video.currentTime = clampTime(video.currentTime - 10);
+      } else if (action === "fwd") {
+        video.currentTime = clampTime(video.currentTime + 10);
+      } else if (action === "toggle") {
+        if (video.paused) video.play();
+        else video.pause();
+      }
+    });
+
+    video.addEventListener("play", updateToggleLabel);
+    video.addEventListener("pause", updateToggleLabel);
+    updateToggleLabel();
+  })();
 })();
